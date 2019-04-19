@@ -1,4 +1,4 @@
-#/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/bin/python3
+#/usr/bin/python3
 import os, requests, sys, time
 from time import sleep
 
