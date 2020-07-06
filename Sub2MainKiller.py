@@ -1,6 +1,8 @@
-#/usr/bin/python3
+#/usr/local/Cellar/python/3.7.2_1/Frameworks/Python.framework/Versions/3.7/bin/python3
 import os, requests, sys, time
-from time import sleep
+from time import sleep, time
+import time
+import threading
 
 os.system("clear")
 print ("////////////////////////////////////////////////////////////")
@@ -17,6 +19,8 @@ def get_list():
         print ("[-] Usage: python3 2MainKill3r.py dictionary.lst\n")
         exit()
 
+
+
 #The domain to scan
 def get_domain():
     print("[?] Introduce the domain name to attack!")
@@ -27,6 +31,8 @@ def get_domain():
     else:
         print ("[+] Scanning...")
         return data
+
+
 
 #the TCP connection to test the target.
 def tcp_connection(argu, domain):
@@ -39,6 +45,7 @@ def tcp_connection(argu, domain):
             try:
                 message = str("[+] Trying "+line.rstrip("\n")+"."+domain+"/ ..................................................................................................\n")
                 print (message)
+
                 r = requests.get(query, allow_redirects=True)
                 r = requests.get(query_ssl, allow_redirects= True)
             except requests.exceptions.ConnectionError:
@@ -58,5 +65,9 @@ if __name__ == '__main__':
 
     Get_Arg = get_list()
     Get_Domain = get_domain()
-    tcp_connection(Get_Arg, Get_Domain)
+    threads = []
+
+    t = threading.Thread(target=tcp_connection(Get_Arg, Get_Domain))
+    threads.append(t)
+    t.start()
 
